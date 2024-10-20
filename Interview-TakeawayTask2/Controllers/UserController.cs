@@ -40,7 +40,7 @@ namespace InterviewTakeawayTask2.Controllers
         [HttpPut("{id}")]
         public ActionResult<User> UpdateExistingUser([FromBody] User userUpdate)
         {
-            if (userUpdate == null || string.IsNullOrEmpty(userUpdate.Name) || string.IsNullOrEmpty(userUpdate.Username) || string.IsNullOrEmpty(userUpdate.Password))
+            if (userUpdate == null || string.IsNullOrEmpty(userUpdate.Username) || string.IsNullOrEmpty(userUpdate.Password))
             {
                 return BadRequest("Invalid user data.");
             }
