@@ -36,6 +36,23 @@ namespace InterviewTakeawayTask2.Controllers
             return Ok(user);
         }
 
+        //POST: Update existing user
+        [HttpPut("{id}")]
+        public ActionResult<User> UpdateExistingUser([FromBody] User userUpdate)
+        {
+            if (userUpdate == null || string.IsNullOrEmpty(userUpdate.Name) || string.IsNullOrEmpty(userUpdate.Username) || string.IsNullOrEmpty(userUpdate.Password))
+            {
+                return BadRequest("Invalid user data.");
+            }
+
+            var updateUser = _userRepository.UpdateExistingUser(userUpdate.Name, userUpdate.Password, userUpdate.Email, userUpdate.Age, userUpdate.Id);
+            if (updateUser == null)
+            {
+                return NotFound("User not found");
+            }
+            return Ok(updateUser);
+        }
+
         // POST: Creates a User
         [HttpPost]
         public ActionResult<User> CreateUser([FromBody] UserRequest user)
